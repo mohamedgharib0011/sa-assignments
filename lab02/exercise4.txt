@@ -1,0 +1,11 @@
+Distributed Systems:
+	- Adv:
+		- Scalability: by distributing the work accross various machines
+		- Availability: failure of part doesn't means system failure.
+		- Extendability: multiple teams with multiple technologies can work in parallel 
+	- Disadv:
+		- Developing distributed system is more costly.
+		- Testing the whole system is more difficult.
+		- Distributed transactions is a nightmare.
+		- Data Synchronization became a problem.
+		

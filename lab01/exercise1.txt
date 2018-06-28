@@ -1,0 +1,23 @@
+Performance:
+	- caching
+	- Multithreading
+	- Using Data Structure Perfectly.
+Scalability:
+	- Microservice Architecture
+	- Using Tier Architecture
+	- Using Stateless Server
+	- Using Load Balancer
+Availability:
+	- Microservice Architecture
+	- Using Tier Architecture
+	- Using Load Balancer
+	- Failover
+Maintainability:
+	- Using Design Patterns
+	- Using Layers
+	- Unit Testing
+Reliability:
+	- Using Stateless Server
+	- Using Load Balancer
+	- Failover
+	

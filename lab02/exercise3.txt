@@ -1,0 +1,41 @@
+RMI
+	- Adv:
+		- Usefull with request/response model.
+		- Simple.
+	- Disadv:
+		- sync. Client have to wait.
+		- Extra effort for serialization and deserialization.
+JMS
+	- Adv:
+		- High performance because of as async behavior.
+	- Disadv:
+		- Interoperability.
+		- All applications should be In java.
+SOAP
+	- Adv:
+		- Have standards for security, reliability, transactions ..etc
+		- Language Independent.
+	- Disadv:
+		- Slow.
+		- perry hard to understand and develop.
+Rest
+	- Adv:
+		- Language Independent.
+		- Easy to understand and develop.
+	- Disadv:
+		- No standards for security, reliability, transactions ..etc
+Serialized Object over HTTP
+	- Adv:
+		- Pretty fast.
+	- Disadv:
+		- Language Dependent.
+Database Integration
+	- Adv:
+		- No need for applications to be in the same language.
+	- Disadv:
+		- All applications should hold connection information for the DB.
+File Based Integration
+	- Adv:
+		- No need for applications to be in the same language.
+	- Disadv:
+		- Less Security and Scalability.

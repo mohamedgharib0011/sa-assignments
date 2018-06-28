@@ -1,0 +1,16 @@
+State can be stored in:
+1- Server
+	- Advantage:
+		- No need for extra information with each request like stateless applications.
+	- Disadvantage:
+		- Hard to scale.
+		- Less Availability.
+		- Need more memory to store the data.
+2- Client
+	- Advantage:
+		- Easy to scale the application.
+		- Better performance as there is no state so result are cacheable.
+		- One Back-end for all clients (web, mobile).
+		- More simple as every action is independent and no need to track prev one.
+	- Disadvantage:
+		- Each request should include extra information to identify the user.
