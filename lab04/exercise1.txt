@@ -1,0 +1,32 @@
+Product Aggregate
+	Product <<Entity>><<Root>>
+	Review <<Value Object>>
+	Stock <<Value Object>>
+
+Order Aggregate
+	Order <<Entity>><<Root>>
+	ShippingOption <<Value Object>>
+	OrderLine <<Value Object>>
+	Address <<Value Object>>
+
+ShoppingCart Aggregate
+	ShoppingCart <<Entity>><<Root>>
+	CartLine <<Value Object>>
+
+Customer Aggregate
+	Customer <<Entity>><<Root>>
+	Account <<Value Object>>
+	CreditCard <<Value Object>>
+	Address <<Value Object>>
+
+Supplier Aggregate
+	Supplier <<Entity>><<Root>>
+	Address <<Value Object>>
+
+
+
+
+
+
+
+
