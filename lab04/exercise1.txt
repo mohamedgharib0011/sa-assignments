@@ -8,6 +8,7 @@ Order Aggregate
 	ShippingOption <<Value Object>>
 	OrderLine <<Value Object>>
 	Address <<Value Object>>
+	Product <<Value Object>>
 
 ShoppingCart Aggregate
 	ShoppingCart <<Entity>><<Root>>
@@ -22,11 +23,3 @@ Customer Aggregate
 Supplier Aggregate
 	Supplier <<Entity>><<Root>>
 	Address <<Value Object>>
-
-
-
-
-
-
-
-
