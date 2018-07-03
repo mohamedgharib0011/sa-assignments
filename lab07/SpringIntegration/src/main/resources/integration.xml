@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+	xmlns="http://www.springframework.org/schema/integration"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:int-http="http://www.springframework.org/schema/integration/http"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/integration/http 
+        http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
+        http://www.springframework.org/schema/integration
+        http://www.springframework.org/schema/integration/spring-integration.xsd">
+
+
+	<channel id="warehouseInputChannel" />
+	<channel id="warehouseOutputChannel" />
+	<channel id="normalShippingInputChannel" />
+	<channel id="nextDayShippingInputChannel" />
+
+	<service-activator
+		input-channel="warehouseInputChannel" ref="warehouseService"
+		method="receiveOrder" output-channel="warehouseOutputChannel" />
+
+	<router ref="orderShippingRouter" method="route" input-channel="warehouseOutputChannel"></router>
+
+
+
+	<service-activator
+		input-channel="nextDayShippingInputChannel" ref="nextDayShippingService"
+		method="receiveOrder" />
+
+	<service-activator
+		input-channel="normalShippingInputChannel" ref="normalShippingService"
+		method="receiveOrder" />
+
+	<beans:bean id="helloService"
+		class="integration.HelloService" />
+
+	<beans:bean id="warehouseService"
+		class="integration.WarehouseService" />
+
+	<beans:bean id="shippingService"
+		class="integration.ShippingService" />
+
+	<beans:bean id="normalShippingService"
+		class="integration.NormalShippingService" />
+
+	<beans:bean id="nextDayShippingService"
+		class="integration.NextDayShipping" />
+
+
+
+
+	<beans:bean id="orderShippingRouter"
+		class="integration.OrderShippingRouter"></beans:bean>
+
+</beans:beans>

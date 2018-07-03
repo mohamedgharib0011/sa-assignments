@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+	xmlns="http://www.springframework.org/schema/integration"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:int-http="http://www.springframework.org/schema/integration/http"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/integration/http 
+        http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
+        http://www.springframework.org/schema/integration
+        http://www.springframework.org/schema/integration/spring-integration.xsd">
+
+
+	<channel id="orderInputChannel" />
+	<channel id="rejectedOrderAmountChannel" />
+	<channel id="acceptedOrderAmountChannel" />
+	<channel id="invalidOrderStockChannel" />
+	<channel id="validOrderStockChannel" />
+	<channel id="validOrderPaymentChannel" />
+	<channel id="fedexShippingChannel" />
+	<channel id="dhlShippingChannel" />
+
+	<beans:bean id="dhlShippingService"
+		class="integration.activators.DHLShippingService"></beans:bean>
+	<beans:bean id="fedexShippingService"
+		class="integration.activators.FedexShippingService"></beans:bean>
+	<beans:bean id="rejectedOrderAmountService"
+		class="integration.activators.RejectedOrderAmountService"></beans:bean>
+	<beans:bean id="underStockOrderService"
+		class="integration.activators.UnderStockOrderService"></beans:bean>
+
+	<beans:bean id="orderShippingRouter"
+		class="integration.router.OrderShippingRouter"></beans:bean>
+
+	<beans:bean id="orderAmountFilter"
+		class="integration.filter.OrderAmountFilter"></beans:bean>
+	<beans:bean id="orderPaymentFilter"
+		class="integration.filter.OrderPaymentFilter"></beans:bean>
+	<beans:bean id="orderStockFilter"
+		class="integration.filter.OrderStockFilter"></beans:bean>
+
+
+	<filter ref="orderAmountFilter" method="filter"
+		input-channel="orderInputChannel"
+		discard-channel="rejectedOrderAmountChannel"
+		output-channel="acceptedOrderAmountChannel"></filter>
+
+	<service-activator
+		input-channel="rejectedOrderAmountChannel"
+		ref="rejectedOrderAmountService" method="receiveOrder" />
+
+	<filter ref="orderStockFilter" method="filter"
+		input-channel="acceptedOrderAmountChannel"
+		discard-channel="invalidOrderStockChannel"
+		output-channel="validOrderStockChannel"></filter>
+
+	<service-activator
+		input-channel="invalidOrderStockChannel" ref="underStockOrderService"
+		method="receiveOrder" />
+
+	<filter ref="orderPaymentFilter" method="filter"
+		input-channel="validOrderStockChannel"
+		output-channel="validOrderPaymentChannel"></filter>
+
+	<router ref="orderShippingRouter" method="route"
+		input-channel="validOrderPaymentChannel"></router>
+
+	<service-activator
+		input-channel="fedexShippingChannel" ref="fedexShippingService"
+		method="receiveOrder" />
+
+	<service-activator input-channel="dhlShippingChannel"
+		ref="dhlShippingService" method="receiveOrder" />
+
+
+</beans:beans>
