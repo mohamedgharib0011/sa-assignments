@@ -1,0 +1,21 @@
+spring:
+  data:
+    mongodb:
+      database: testdb
+      host: localhost
+      port: 27017
+     
+      
+logging:
+  level:
+    root: ERROR
+
+
+server:
+  port: 8093
+  
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
